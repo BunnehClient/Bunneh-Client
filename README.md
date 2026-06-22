@@ -30,3 +30,5 @@ Even though I did not want this to be leaked, It got leaked either way, I don't 
 - Make a new configuration and make it do `build`
 - Find jar in project's `build/libs` (name should be argon-b1.1.jar unless you change it) 
 ![image](https://github.com/user-attachments/assets/b2e8853e-2916-4219-9443-85ff7549d418)
+
+~~this is to trigger the workflow~~
