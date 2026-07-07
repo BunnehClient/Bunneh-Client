@@ -1,10 +1,10 @@
-package dev.lvstrng.argon.gui;
+package dev.lvstrng.bunneh.gui;
 
-import dev.lvstrng.argon.Argon;
-import dev.lvstrng.argon.module.Category;
-import dev.lvstrng.argon.module.modules.client.ClickGUI;
-import dev.lvstrng.argon.utils.ColorUtils;
-import dev.lvstrng.argon.utils.RenderUtils;
+import dev.lvstrng.bunneh.Bunneh;
+import dev.lvstrng.bunneh.module.Category;
+import dev.lvstrng.bunneh.module.modules.client.ClickGUI;
+import dev.lvstrng.bunneh.utils.ColorUtils;
+import dev.lvstrng.bunneh.utils.RenderUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.DrawContext;
@@ -16,7 +16,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static dev.lvstrng.argon.Argon.mc;
+import static dev.lvstrng.bunneh.Bunneh.mc;
 
 public final class ClickGui extends Screen {
 	public List<Window> windows = new ArrayList<>();
@@ -52,12 +52,12 @@ public final class ClickGui extends Screen {
 	@Override
 	public void render(DrawContext context, int mouseX, int mouseY, float delta) {
 		if (mc.currentScreen == this) {
-			if (Argon.INSTANCE.previousScreen != null)
-				Argon.INSTANCE.previousScreen.render(context, 0, 0, delta);
+			if (Bunneh.INSTANCE.previousScreen != null)
+				Bunneh.INSTANCE.previousScreen.render(context, 0, 0, delta);
 
 			if (currentColor == null)
-				currentColor = new Color(0, 0, 0, 0);
-			else currentColor = new Color(0, 0, 0, currentColor.getAlpha());
+				currentColor = new Color(20, 0, 0, 0);
+			else currentColor = new Color(20, 0, 0, currentColor.getAlpha());
 
 			if (currentColor.getAlpha() != (ClickGUI.background.getValue() ? 200 : 0))
 				currentColor = ColorUtils.smoothAlphaTransition(0.05F, ClickGUI.background.getValue() ? 200 : 0, currentColor);
@@ -139,12 +139,12 @@ public final class ClickGui extends Screen {
 
 	@Override
 	public void close() {
-		Argon.INSTANCE.getModuleManager().getModule(ClickGUI.class).setEnabledStatus(false);
+		Bunneh.INSTANCE.getModuleManager().getModule(ClickGUI.class).setEnabledStatus(false);
 		onGuiClose();
 	}
 
 	public void onGuiClose() {
-		mc.setScreenAndRender(Argon.INSTANCE.previousScreen);
+		mc.setScreenAndRender(Bunneh.INSTANCE.previousScreen);
 		currentColor = null;
 
 		for (Window window : windows)
