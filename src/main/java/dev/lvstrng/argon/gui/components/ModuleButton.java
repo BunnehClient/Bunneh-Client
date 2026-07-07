@@ -1,12 +1,12 @@
-package dev.lvstrng.argon.gui.components;
+package dev.lvstrng.bunneh.gui.components;
 
-import dev.lvstrng.argon.Argon;
-import dev.lvstrng.argon.gui.Window;
-import dev.lvstrng.argon.gui.components.settings.*;
-import dev.lvstrng.argon.module.Module;
-import dev.lvstrng.argon.module.modules.client.ClickGUI;
-import dev.lvstrng.argon.module.setting.*;
-import dev.lvstrng.argon.utils.*;
+import dev.lvstrng.bunneh.Bunneh;
+import dev.lvstrng.bunneh.gui.Window;
+import dev.lvstrng.bunneh.gui.components.settings.*;
+import dev.lvstrng.bunneh.module.Module;
+import dev.lvstrng.bunneh.module.modules.client.ClickGUI;
+import dev.lvstrng.bunneh.module.setting.*;
+import dev.lvstrng.bunneh.utils.*;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 
@@ -14,7 +14,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static dev.lvstrng.argon.Argon.mc;
+import static dev.lvstrng.bunneh.Bunneh.mc;
 
 public final class ModuleButton {
 	public List<RenderableSetting> settings = new ArrayList<>();
@@ -24,7 +24,7 @@ public final class ModuleButton {
 	public boolean extended;
 	public int settingOffset;
 	public Color currentColor;
-	public Color defaultColor = Color.WHITE;
+	public Color defaultColor = new Color(220, 20, 20);
 	public Color currentAlpha;
 	public AnimationUtils animation = new AnimationUtils(0);
 
@@ -68,17 +68,17 @@ public final class ModuleButton {
 
 		currentColor = ColorUtils.smoothAlphaTransition(0.05F, toAlpha, currentColor);
 
-		Color toColor = module.isEnabled() ? Utils.getMainColor(255, Argon.INSTANCE.getModuleManager().getModulesInCategory(module.getCategory()).indexOf(module)) : Color.WHITE;
+		Color toColor = module.isEnabled() ? Utils.getMainColor(255, Bunneh.INSTANCE.getModuleManager().getModulesInCategory(module.getCategory()).indexOf(module)) : new Color(220, 20, 20);
 
 		if (defaultColor != toColor)
 			defaultColor = ColorUtils.smoothColorTransition(0.1F, toColor, defaultColor);
 
 		if (parent.moduleButtons.get(parent.moduleButtons.size() - 1) != this) {
 			context.fill(parent.getX(), parent.getY() + offset, parent.getX() + parent.getWidth(), parent.getY() + parent.getHeight() + offset, currentColor.getRGB());
-			context.fillGradient(parent.getX(), parent.getY() + offset, parent.getX() + 2, parent.getY() + parent.getHeight() + offset, Utils.getMainColor(255, Argon.INSTANCE.getModuleManager().getModulesInCategory(module.getCategory()).indexOf(module)).getRGB(), Utils.getMainColor(255, Argon.INSTANCE.getModuleManager().getModulesInCategory(module.getCategory()).indexOf(module) + 1).getRGB());
+			context.fillGradient(parent.getX(), parent.getY() + offset, parent.getX() + 2, parent.getY() + parent.getHeight() + offset, Utils.getMainColor(255, Bunneh.INSTANCE.getModuleManager().getModulesInCategory(module.getCategory()).indexOf(module)).getRGB(), Utils.getMainColor(255, Bunneh.INSTANCE.getModuleManager().getModulesInCategory(module.getCategory()).indexOf(module) + 1).getRGB());
 		} else {
 			RenderUtils.renderRoundedQuad(context, currentColor, parent.getX(), parent.getY() + offset, parent.getX() + parent.getWidth(), parent.getY() + parent.getHeight() + offset, 0, 0, 3, animation.getValue() > 30 ? 0 : ClickGUI.roundQuads.getValueInt(), 50);
-			RenderUtils.renderRoundedQuad(context, Utils.getMainColor(255, Argon.INSTANCE.getModuleManager().getModulesInCategory(module.getCategory()).indexOf(module)), parent.getX(), parent.getY() + offset, parent.getX() + 2, parent.getY() + (parent.getHeight() - 1) + offset, 0, 0, extended ? 0 : 2, 0, 50);
+			RenderUtils.renderRoundedQuad(context, Utils.getMainColor(255, Bunneh.INSTANCE.getModuleManager().getModulesInCategory(module.getCategory()).indexOf(module)), parent.getX(), parent.getY() + offset, parent.getX() + 2, parent.getY() + (parent.getHeight() - 1) + offset, 0, 0, extended ? 0 : 2, 0, 50);
 		}
 
 		CharSequence nameChars = module.getName();
@@ -106,7 +106,7 @@ public final class ModuleButton {
 
 			RenderUtils.renderRoundedQuad(
 					context,
-					new Color(100, 100, 100, 100),
+					new Color(120, 20, 20, 100),
 					textCenter - 5,
 					((double) mc.getWindow().getFramebufferHeight() / 2) + 294,
 					textCenter + tw + 5,
@@ -115,7 +115,7 @@ public final class ModuleButton {
 					10
 			);
 
-			TextRenderer.drawString(chars, context, textCenter, (mc.getWindow().getFramebufferHeight() / 2) + 300, Color.WHITE.getRGB());
+			TextRenderer.drawString(chars, context, textCenter, (mc.getWindow().getFramebufferHeight() / 2) + 300, new Color(220, 20, 20).getRGB());
 		}
 	}
 
@@ -124,8 +124,8 @@ public final class ModuleButton {
 			int toHoverAlpha = isHovered(mouseX, mouseY) ? 15 : 0;
 
 			if (currentAlpha == null)
-				currentAlpha = new Color(255, 255, 255, toHoverAlpha);
-			else currentAlpha = new Color(255, 255, 255, currentAlpha.getAlpha());
+				currentAlpha = new Color(220, 20, 20, toHoverAlpha);
+			else currentAlpha = new Color(220, 20, 20, currentAlpha.getAlpha());
 
 			if (currentAlpha.getAlpha() != toHoverAlpha)
 				currentAlpha = ColorUtils.smoothAlphaTransition(0.05F, toHoverAlpha, currentAlpha);
