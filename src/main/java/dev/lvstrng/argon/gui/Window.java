@@ -1,11 +1,11 @@
-package dev.lvstrng.argon.gui;
+package dev.lvstrng.bunneh.gui;
 
-import dev.lvstrng.argon.Argon;
-import dev.lvstrng.argon.gui.components.ModuleButton;
-import dev.lvstrng.argon.module.Category;
-import dev.lvstrng.argon.module.Module;
-import dev.lvstrng.argon.module.modules.client.ClickGUI;
-import dev.lvstrng.argon.utils.*;
+import dev.lvstrng.bunneh.Bunneh;
+import dev.lvstrng.bunneh.gui.components.ModuleButton;
+import dev.lvstrng.bunneh.module.Category;
+import dev.lvstrng.bunneh.module.Module;
+import dev.lvstrng.bunneh.module.modules.client.ClickGUI;
+import dev.lvstrng.bunneh.utils.*;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.util.math.MathHelper;
 import org.lwjgl.opengl.GL11;
@@ -41,7 +41,7 @@ public final class Window {
 		this.prevY = y;
 
 		int offset = height;
-		List<Module> sortedModules = new ArrayList<>(Argon.INSTANCE.getModuleManager().getModulesInCategory(category));
+		List<Module> sortedModules = new ArrayList<>(Bunneh.INSTANCE.getModuleManager().getModulesInCategory(category));
 
 		for (Module module : sortedModules) {
 			moduleButtons.add(new ModuleButton(this, module, offset));
@@ -53,8 +53,8 @@ public final class Window {
 		int toAlpha = ClickGUI.alphaWindow.getValueInt();
 
 		if (currentColor == null)
-			currentColor = new Color(0, 0, 0, 0);
-		else currentColor = new Color(0, 0, 0, currentColor.getAlpha());
+			currentColor = new Color(20, 0, 0, 0);
+		else currentColor = new Color(20, 0, 0, currentColor.getAlpha());
 
 		if (currentColor.getAlpha() != toAlpha)
 			currentColor = ColorUtils.smoothAlphaTransition(0.05F, toAlpha, currentColor);
@@ -66,7 +66,7 @@ public final class Window {
 		int totalWidth = TextRenderer.getWidth(category.name);
 		int startX = charOffset - (totalWidth / 2);
 
-		TextRenderer.drawString(category.name, context, startX, prevY + 6, Color.WHITE.getRGB());
+		TextRenderer.drawString(category.name, context, startX, prevY + 6, new Color(220, 20, 20).getRGB());
 
 		updateButtons(delta);
 
